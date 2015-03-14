@@ -18,6 +18,3 @@ T_failMessage() {
 		| grep "This is a fail message." > /dev/null
 }
 
-T_example() {
-	$SELF "$(dirname $BASH_SOURCE)/example.bash" &> /dev/null
-}
