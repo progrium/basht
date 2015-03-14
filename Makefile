@@ -11,7 +11,14 @@ deps:
 	go get -u github.com/progrium/gh-release/...
 	go get || true
 
-test: build
+test:
 	build/$(shell uname -s)/basht tests/meta.bash
 
-.PHONY: build
+release:
+	rm -rf release && mkdir release
+	tar -zcf release/$(NAME)_$(VERSION)_Linux_$(shell uname -m).tgz -C build/Linux $(NAME)
+	tar -zcf release/$(NAME)_$(VERSION)_Darwin_$(shell uname -m).tgz -C build/Darwin $(NAME)
+	gh-release create progrium/$(NAME) $(VERSION) \
+		$(shell git rev-parse --abbrev-ref HEAD) v$(VERSION)
+
+.PHONY: build release
