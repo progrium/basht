@@ -1,4 +1,4 @@
-# basht
+# bashT [![Circle CI](https://circleci.com/gh/progrium/basht.png?style=shield)](https://circleci.com/gh/progrium/basht)
 
 Basht is a minimalist Bash testing utility. You can write tests in pure Bash, just pass it one or more Bash source files that define tests. Tests are functions that start with `T_`:
 
