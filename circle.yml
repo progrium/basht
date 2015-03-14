@@ -1,5 +1,6 @@
 dependencies:
   pre:
+    - rm ~/.gitconfig
     - make deps
   override:
     - make build
