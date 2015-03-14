@@ -1,0 +1,18 @@
+dependencies:
+  pre:
+    - make deps
+  override:
+    - make build
+  post:
+    - tar -czf $CIRCLE_ARTIFACTS/basht-linux.tgz -C build/Linux basht
+    - tar -czf $CIRCLE_ARTIFACTS/basht-darwin.tgz -C build/Darwin basht
+
+test:
+  override:
+    - make test
+
+deployment:
+  release:
+    branch: release
+    commands:
+      - make release
