@@ -6,16 +6,16 @@ __contains() {
 __failMacro() {
 	local line="$1"; shift
 	__test_status=1
-	__test_message="$line: $@"
+	__test_message="$line: $*"
 }
-T_fail='eval __failMacro $BASH_SOURCE:$LINENO'
+readonly T_fail='eval __failMacro $BASH_SOURCE:$LINENO'
 
 main() {
 	local run failed start stop duration
 	declare -a processed
 	run=0
 	failed=0
-	for file in $@; do
+	for file in "$@"; do
 		source "$file"
 		for t in $(declare -F | grep 'declare -f T_' | awk '{print $3}'); do
 			if ! __contains "$t" "${processed[@]}"; then
@@ -25,13 +25,13 @@ main() {
 				$t
 				__test_status=${__test_status:-$?}
 				stop="$SECONDS"
-				duration=$(($stop-$start))
+				duration=$((stop-start))
 				processed+=("$t")
-				run=$(($run+1))
+				run=$((run+1))
 				if [[ "$__test_status" == 0 ]]; then
 					echo "--- PASS $t (${duration}s)"
 				else
-					failed=$(($failed+1))
+					failed=$((failed+1))
 					echo "--- FAIL $t (${duration}s)"
 					if [[ "$__test_message" ]]; then
 						echo "    $__test_message"
