@@ -92,14 +92,14 @@ T_failMultiple() {
 Good question. I've used both and enjoyed using them until I got tired of what I didn't like. With Bats these issues bothered me:
 
  * Useless syntactic sugar making test files require Bats instead of just Bash to process, making Bats more complicated and harder to debug.
- * The Bats-specific helpers that could be replaced with idiomatic Bash-isms.
  * Using `set -e` means you have to use the `run` helper for nearly everythng in larger tests.
+ * The other Bats-specific helpers that could be replaced with idiomatic Bash-isms.
  * The multi-file, multi-directory install.
 
-On the plus side, it did take a might more lightweight approach to unit testing. But the issues made me turn to shunit2. It addressed all the above issue, but then I ran into:
+On the plus side, it did take a much more lightweight approach to unit testing. But the issues made me turn to shunit2. It addressed all the above issues, but then I ran into:
 
  * For what it did and what I used, it was not worth the 1000 lines of overly portable, overly clever shell script.
- * I had to modify it anyway, and ended up putting it in the source of every project that used it.
+ * With all it did, I had to modify it anyway, and ended up putting it in the source of every project that used it.
 
 Basht might not be for everybody, but I wrote it and use it because:
 
